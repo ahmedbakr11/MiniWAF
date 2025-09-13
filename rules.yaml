@@ -1,0 +1,51 @@
+version: 1
+ip_allowlist: ["127.0.0.1"] # Always allowed (for admin paths)
+ip_blocklist: []
+rate_limit:
+requests: 30 # max requests per window
+window_seconds: 60 # sliding window length
+
+
+rules:
+- id: "XSS-1001"
+description: "Basic XSS payloads"
+target: ["path", "query", "body"]
+action: "block"
+patterns:
+- "(?i)<script"
+- "(?i)onerror="
+- "(?i)onload="
+- "(?i)javascript:"
+
+
+- id: "SQLI-1002"
+description: "Simple SQL injection"
+target: ["path", "query", "body"]
+action: "block"
+patterns:
+- "(?i)union\s+select"
+- "(?i)or\s+1=1"
+- "(?i)sleep\(\d+\)"
+- "(?i)benchmark\("
+
+
+- id: "TRAV-1003"
+description: "Path traversal"
+target: ["path", "query"]
+action: "block"
+patterns:
+- "\.\./"
+
+
+- id: "CMDI-1004"
+description: "Command injection separators"
+target: ["query", "body"]
+action: "block"
+patterns:
+- ";\s*(cat|ls|bash|sh)"
+- "&&\s*(cat|ls|bash|sh)"
+
+
+protected_paths:
+- path_regex: "^/admin"
+allowlist_only: true # only ip_allowlist may access
