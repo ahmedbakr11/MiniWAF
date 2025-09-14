@@ -1,51 +1,56 @@
 version: 1
-ip_allowlist: ["127.0.0.1"] # Always allowed (for admin paths)
+
+# IP Access Control
+ip_allowlist: ["127.0.0.1"]   # Always allowed (for admin paths)
 ip_blocklist: []
+
+# Rate limiting (per IP)
 rate_limit:
-requests: 30 # max requests per window
-window_seconds: 60 # sliding window length
+  requests: 30         # max requests allowed
+  window_seconds: 60   # per 60 seconds
 
-
+# Security Rules
 rules:
-- id: "XSS-1001"
-description: "Basic XSS payloads"
-target: ["path", "query", "body"]
-action: "block"
-patterns:
-- "(?i)<script"
-- "(?i)onerror="
-- "(?i)onload="
-- "(?i)javascript:"
+  - id: "XSS-1001"
+    description: "Basic XSS payloads"
+    target: ["path", "query", "body"]
+    action: "block"
+    patterns:
+      - '(?i)<script'
+      - '(?i)onerror='
+      - '(?i)onload='
+      - '(?i)javascript:'
+
+  - id: "SQLI-1002"
+    description: "Simple SQL injection"
+    target: ["path", "query", "body"]
+    action: "block"
+    patterns:
+      - '(?i)union\s+select'
+      - '(?i)or\s+1=1'
+      - '(?i)sleep\(\d+\)'
+      - '(?i)benchmark\('
+
+  - id: "TRAV-1003"
+    description: "Path traversal"
+    target: ["path", "query"]
+    action: "block"
+    patterns:
+      - '\.\./'         # ../
+      - '\.\.\\'        # ..\ (Windows style)
+      - '%2e%2e'        # encoded ..
+      - '%252e%252e'    # double-encoded ..
 
 
-- id: "SQLI-1002"
-description: "Simple SQL injection"
-target: ["path", "query", "body"]
-action: "block"
-patterns:
-- "(?i)union\s+select"
-- "(?i)or\s+1=1"
-- "(?i)sleep\(\d+\)"
-- "(?i)benchmark\("
+  - id: "CMDI-1004"
+    description: "Command injection separators"
+    target: ["query", "body"]
+    action: "block"
+    patterns:
+      - ';\s*(cat|ls|bash|sh)'
+      - '&&\s*(cat|ls|bash|sh)'
 
-
-- id: "TRAV-1003"
-description: "Path traversal"
-target: ["path", "query"]
-action: "block"
-patterns:
-- "\.\./"
-
-
-- id: "CMDI-1004"
-description: "Command injection separators"
-target: ["query", "body"]
-action: "block"
-patterns:
-- ";\s*(cat|ls|bash|sh)"
-- "&&\s*(cat|ls|bash|sh)"
-
-
+# Protected paths
 protected_paths:
-- path_regex: "^/admin"
-allowlist_only: true # only ip_allowlist may access
+  - path_regex: "^/admin"
+    allowlist_only: true   # only ip_allowlist may access
