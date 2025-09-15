@@ -6,7 +6,7 @@ It sits as a **reverse proxy** in front of a deliberately vulnerable demo app, i
 ---
 
 ## 🎥 Project Showcase
-![Demo GIF](/media.MINIWAFSNAPSHOTS.gif)  
+![Demo GIF](media/MINIWAFSNAPSHOTS.gif)  
 *Replace `demo.gif` with a screen recording of your WAF blocking attacks.*
 
 ---
