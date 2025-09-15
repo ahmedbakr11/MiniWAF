@@ -1,7 +1,6 @@
-# 🛡️ Mini WAF — Portfolio Project
-
+# 🛡️ Mini WAF 
 A lightweight **Web Application Firewall (WAF)** built with **FastAPI**.  
-It sits as a **reverse proxy** in front of a vulnerable demo app, Signature based inspecting to all requests for malicious patterns such as **XSS, SQL Injection, Path Traversal, and Command Injection**.
+It sits as a **reverse proxy** in front of a vulnerable demo webapp, Signature based inspecting to all requests for malicious patterns such as **XSS, SQL Injection, Path Traversal, and Command Injection**.
 
 ---
 
