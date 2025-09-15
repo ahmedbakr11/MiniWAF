@@ -1,7 +1,7 @@
 # 🛡️ Mini WAF — Portfolio Project
 
 A lightweight **Web Application Firewall (WAF)** built with **FastAPI**.  
-It sits as a **reverse proxy** in front of a vulnerable demo app, inspecting all requests for malicious patterns such as **XSS, SQL Injection, Path Traversal, and Command Injection**.
+It sits as a **reverse proxy** in front of a vulnerable demo app, Signature based inspecting to all requests for malicious patterns such as **XSS, SQL Injection, Path Traversal, and Command Injection**.
 
 ---
 
@@ -13,7 +13,7 @@ It sits as a **reverse proxy** in front of a vulnerable demo app, inspecting all
 
 ## 🚀 Features
 - **Reverse Proxy**: All traffic passes through the WAF before reaching the backend.  
-- **Configurable Rules**: Detection patterns written in `rules.yaml` (easy to extend).  
+- **Configurable Rules**: Detection patterns written in `rules.yaml`.  
 - **Regex-based Detection**:
   - Cross-Site Scripting (XSS): `<script>`, `onerror=`, `javascript:`  
   - SQL Injection: `UNION SELECT`, `OR 1=1`, `SLEEP(...)`  
