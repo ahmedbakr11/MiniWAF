@@ -1,13 +1,13 @@
 # 🛡️ Mini WAF — Portfolio Project
 
 A lightweight **Web Application Firewall (WAF)** built with **FastAPI**.  
-It sits as a **reverse proxy** in front of a deliberately vulnerable demo app, inspecting all requests for malicious patterns such as **XSS, SQL Injection, Path Traversal, and Command Injection**.
+It sits as a **reverse proxy** in front of a vulnerable demo app, inspecting all requests for malicious patterns such as **XSS, SQL Injection, Path Traversal, and Command Injection**.
 
 ---
 
 ## 🎥 Project Showcase
 ![Demo GIF](media/MINIWAFSNAPSHOTS.gif)  
-*Replace `demo.gif` with a screen recording of your WAF blocking attacks.*
+*Snapshots of the project demo*
 
 ---
 
@@ -33,3 +33,16 @@ It sits as a **reverse proxy** in front of a deliberately vulnerable demo app, i
 python -m venv .venv
 .venv\Scripts\activate   # on Windows
 pip install -r requirements.txt
+```
+
+### 2. Run the vulnerable backend
+```bash
+python demo_app.py
+```
+*Webapp runs at: http://127.0.0.1:5001*
+
+### 3. Run the WAF
+```bash
+uvicorn waf:app --host 127.0.0.1 --port 8080
+```
+*WAF listens at: http://127.0.0.1:8080*
