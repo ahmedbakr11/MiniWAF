@@ -1,14 +1,35 @@
-# Mini WAF (Portfolio)
+# 🛡️ Mini WAF — Portfolio Project
 
+A lightweight **Web Application Firewall (WAF)** built with **FastAPI**.  
+It sits as a **reverse proxy** in front of a deliberately vulnerable demo app, inspecting all requests for malicious patterns such as **XSS, SQL Injection, Path Traversal, and Command Injection**.
 
-A tiny reverse-proxy Web Application Firewall built with FastAPI. It inspects requests using simple regex rules, rate limits clients, supports IP ACLs, and logs blocked events.
+---
 
+## 🎥 Project Showcase
+![Demo GIF](/media.MINIWAFSNAPSHOTS.gif)  
+*Replace `demo.gif` with a screen recording of your WAF blocking attacks.*
 
-## Run locally
+---
+
+## 🚀 Features
+- **Reverse Proxy**: All traffic passes through the WAF before reaching the backend.  
+- **Configurable Rules**: Detection patterns written in `rules.yaml` (easy to extend).  
+- **Regex-based Detection**:
+  - Cross-Site Scripting (XSS): `<script>`, `onerror=`, `javascript:`  
+  - SQL Injection: `UNION SELECT`, `OR 1=1`, `SLEEP(...)`  
+  - Path Traversal: `../`, `%2e%2e/`  
+  - Command Injection: `; ls`, `&& cat /etc/passwd`  
+- **IP Access Control**: Allowlist & blocklist support.  
+- **Rate Limiting**: Prevents brute-force attempts per IP.  
+- **Protected Paths**: Example — `/admin` only accessible from allowlisted IPs.  
+- **Logging**: Blocked and suspicious requests are written to `waf.log`.
+
+---
+
+## ⚡ Setup
+
+### 1. Install dependencies
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv
+.venv\Scripts\activate   # on Windows
 pip install -r requirements.txt
-# Start backend
-python demo_app.py # listens on 127.0.0.1:5001
-# In another terminal, start the WAF
-uvicorn waf:app --host 127.0.0.1 --port 8080
