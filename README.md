@@ -9,7 +9,7 @@ It sits as a **reverse proxy** in front of a vulnerable demo app, Signature base
 ![Demo GIF](media/MINIWAFSNAPSHOTS.gif)  
 *Snapshots of the project demo*
 
-[Full Demo](https://drive.google.com/file/d/1MEIkIWQtOkznkz1RMni7cN5fbWGTLaYo/view?usp=sharing)
+Full Demo(https://drive.google.com/file/d/1MEIkIWQtOkznkz1RMni7cN5fbWGTLaYo/view?usp=sharing)
 ---
 
 ## 🚀 Features
